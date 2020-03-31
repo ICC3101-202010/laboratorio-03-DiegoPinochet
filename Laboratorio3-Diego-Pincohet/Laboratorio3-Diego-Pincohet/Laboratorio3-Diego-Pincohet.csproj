@@ -43,6 +43,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Auxiliar.cs" />
+    <Compile Include="Cajeros.cs" />
+    <Compile Include="Carro_de_Compras.cs" />
+    <Compile Include="Cllientes.cs" />
+    <Compile Include="Empleados.cs" />
+    <Compile Include="Jefes.cs" />
+    <Compile Include="Persona.cs" />
+    <Compile Include="Producto.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
