@@ -8,20 +8,26 @@ namespace Laboratorio3_Diego_Pincohet
 {
     class Producto
     {
-        private string Precio;
-        public string _Precio { get => Precio; set => Precio = value; }
+        private int Precio;
+        public int _Precio { get => Precio; set => Precio = value; }
 
         private string Nombre;
-        public string Nombre1 { get => Nombre; set => Nombre = value; }
+        public string _Nombre { get => Nombre; set => Nombre = value; }
 
         private string Marca;
-        public string Marca1 { get => Marca; set => Marca = value; }
+        public string _Marca { get => Marca; set => Marca = value; }
 
-        private string Stock_disponible;
-        public string Stock_disponible1 { get => Stock_disponible; set => Stock_disponible = value; }
+        private int Stock_disponible;
+        public int _Stock_disponible { get => Stock_disponible; set => Stock_disponible = value; }
 
         private string Fecha_compra;
-        public string Fecha_compra1 { get => Fecha_compra; set => Fecha_compra = value; }
+        public string _Fecha_compra { get => Fecha_compra; set => Fecha_compra = value; }
+
+        public string Info_Producto()
+        {
+            string Info = _Nombre + " " + _Marca;
+            return Info;
+        }
 
 
 
