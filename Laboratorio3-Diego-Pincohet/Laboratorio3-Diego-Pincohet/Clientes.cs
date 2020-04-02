@@ -6,15 +6,21 @@ using System.Threading.Tasks;
 
 namespace Laboratorio3_Diego_Pincohet
 {
-    class Clientes:Persona
+    class Clientes: Persona
     {
         private string Carrito_de_Compras;
-        public string _Carrito_de_Compras { get => Carrito_de_Compras; set => Carrito_de_Compras = value; }
-       
         private int Mi_Dinero;
-        public int _Mi_Dinero { get => Mi_Dinero; set => Mi_Dinero = value; }
 
-
+        public Clientes(string name, string lastname, string rut, string date_of_birth, string nacionality, int mi_dinero, string carrito_de_compras)
+        {
+            this.Nombre = name;
+            this.Apellido = lastname;
+            this.Rut = rut;
+            this.Fecha_de_Nacimiento = date_of_birth;
+            this.Nacionalidad = nacionality;
+            this.Mi_Dinero = mi_dinero;
+            this.Carrito_de_Compras = carrito_de_compras;
+        }
 
         public List<Producto> Agregar_Producto(Producto producto, List<Producto> Carrito, Stock stock, int Cantidad_de_Productos)
         {
@@ -28,6 +34,17 @@ namespace Laboratorio3_Diego_Pincohet
                 return Carrito;
             }
 ;
+        }
+
+        public int Mi_Efectivo()
+        {
+            int dinero = Mi_Dinero;
+            return dinero;
+        }
+        public string Mi_nombre()
+        {
+            string name = Nombre + " " + Apellido;
+            return name;
         }
         
     }

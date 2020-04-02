@@ -6,20 +6,15 @@ using System.Threading.Tasks;
 
 namespace Laboratorio3_Diego_Pincohet
 {
-    public class Empleados : Persona
+    interface IEmpleados
     {
-        private int Sueldo;
-        public int _Sueldo { get => Sueldo; set => Sueldo = value; }
 
-        private string Puesto_de_Trabajo;
-        public string _Puesto_de_Trabajo { get => Puesto_de_Trabajo; set => Puesto_de_Trabajo = value; }
+        int Sueldo { get; set; }
+        string Puesto_de_Trabajo { get; set; }
+        string Horario_de_Trabajo { get; set; }
+        int Buen_Trabajo { get; set; } //Todos parten con _Buen_Trabajao = 0 en el main.
 
-        private string Horario_de_Trabajo;
-        public string _Horario_de_Trabajo { get => Horario_de_Trabajo; set => Horario_de_Trabajo = value; }
 
-        private int Buen_Trabajo;
-        public int _Buen_Trabajo { get => Buen_Trabajo; set => Buen_Trabajo = value; } //Todos parten con _Buen_Trabajao = 0 en el main.
-
-       
+        //no se si ponerle los métodos del jefe aca, ya que este podria ser una interfaz.
     }
 }

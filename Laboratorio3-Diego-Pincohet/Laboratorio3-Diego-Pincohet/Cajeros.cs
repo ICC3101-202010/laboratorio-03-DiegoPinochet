@@ -6,45 +6,75 @@ using System.Threading.Tasks;
 
 namespace Laboratorio3_Diego_Pincohet
 {
-    class Cajeros: Empleados
+    class Cajeros: IEmpleados
     {
         private string Horario_compra;
 
-        public string _Horario_compra { get => Horario_compra; set => Horario_compra = value; }
+        public Cajeros(string horario_de_compra)
+        {
+            this.Horario_compra = horario_de_compra;
+        }
 
-        public int Cuanto_Saldra(List<Producto> Carrito)
+        public int Sueldo { get => Sueldo; set => Sueldo = value; }
+        public string Puesto_de_Trabajo { get => Puesto_de_Trabajo; set => Puesto_de_Trabajo = value; }
+        public string Horario_de_Trabajo { get => Horario_de_Trabajo; set => Horario_de_Trabajo = value; }
+        public int Buen_Trabajo { get => Buen_Trabajo; set => Buen_Trabajo = value; }
+
+        public int Cuanto_Saldra(List<Producto> Carrito) // El carrito que sale del metodo cliente.Agregar()
         {
             int dinero = 0;
             for (int i = 0; i < Carrito.Count; i++)
             {
-                dinero = dinero + Carrito[i]._Precio;
+                dinero = dinero + Carrito[i].Price();
             }
-            _Buen_Trabajo = _Buen_Trabajo + 1;
+            Buen_Trabajo = Buen_Trabajo + 1;
             return dinero;
             
         }
-        public bool Pagar(int total_a_pagar, Clientes cliente)
+        public List<String> Pagar(int total_a_pagar, Clientes cliente, Producto producto, List<Producto> Carrito,List<String> Registro_compras)
         {
-            int mi_dinero = cliente._Mi_Dinero;
+            int mi_dinero = cliente.Mi_Efectivo();
 
-            if (total_a_pagar == mi_dinero)
+            for (int i = 0; i < Carrito.Count; i++)
             {
-                //Poner el horario de compra
-                return true;
+
+                if (total_a_pagar == mi_dinero)
+                {
+
+                    Registro_compras.Add(cliente.Mi_nombre());
+                    Registro_compras.Add(Carrito[i].Info_Producto());
+                    //Poner el horario de compra
+                }
+                else if (total_a_pagar < mi_dinero)
+                {
+                    Registro_compras.Add(cliente.Mi_nombre());
+                    Registro_compras.Add(Carrito[i].Info_Producto());
+                    //Poner el horario de compra
+
+                    Console.WriteLine("Su vuelto es de: " + (mi_dinero - total_a_pagar));
+                }
+                else
+                {
+                    Console.WriteLine("Excede Máximo...");
+                }
             }
-            else if (total_a_pagar < mi_dinero)
+            return Registro_compras;
+        } 
+        
+        public List<String> Ver_Registro_Compras(List<String> Registro_compras) //L
+        {
+            List<String> ver_compras;
+            for(int x = 0; x < Registro_compras.Count; x++)
             {
-                //Horario de compra
-                Console.WriteLine("Su vuelto es de: " + (mi_dinero - total_a_pagar));
-                return true;
+                ver_compras.Add(Registro_compras[x]);
+                return ver_compras;
             }
-            else
-            {
-                Console.WriteLine("Excede Máximo...");
-                return false;
-            }
-            
-        } //No se si hacer una classe "Computador" que lleve el registro de compras(lista de productos, hora, nombre cliente)
+
+
+
+        }
+        
+        //No se si hacer una classe "Computador" que lleve el registro de compras(lista de productos, hora, nombre cliente)
           // o ponerlo en Cajero.
 
     }

@@ -10,6 +10,7 @@ namespace Laboratorio3_Diego_Pincohet
     {
         static void Main(string[] args)
         {
+
         }
     }
 }
