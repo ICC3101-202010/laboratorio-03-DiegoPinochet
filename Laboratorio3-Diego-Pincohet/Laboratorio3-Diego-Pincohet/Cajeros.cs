@@ -9,10 +9,11 @@ namespace Laboratorio3_Diego_Pincohet
     class Cajeros: IEmpleados
     {
         private string Horario_compra;
-
-        public Cajeros(string horario_de_compra)
+        private List<String> Registro_compras;
+        public Cajeros(string horario_de_compra, List<String> registro_compras)
         {
             this.Horario_compra = horario_de_compra;
+            this.Registro_compras = registro_compras;
         }
 
         public int Sueldo { get => Sueldo; set => Sueldo = value; }
@@ -31,9 +32,10 @@ namespace Laboratorio3_Diego_Pincohet
             return dinero;
             
         }
-        public List<String> Pagar(int total_a_pagar, Clientes cliente, Producto producto, List<Producto> Carrito,List<String> Registro_compras)
+        public List<String> Pagar(int total_a_pagar, Clientes cliente, Producto producto, List<Producto> Carrito)
         {
             int mi_dinero = cliente.Mi_Efectivo();
+            string time = "Fecha: "+ DateTime.Today.ToShortDateString() + " Hora:" + DateTime.Now.ToShortTimeString();
 
             for (int i = 0; i < Carrito.Count; i++)
             {
@@ -43,13 +45,13 @@ namespace Laboratorio3_Diego_Pincohet
 
                     Registro_compras.Add(cliente.Mi_nombre());
                     Registro_compras.Add(Carrito[i].Info_Producto());
-                    //Poner el horario de compra
+                    Registro_compras.Add(time);
                 }
                 else if (total_a_pagar < mi_dinero)
                 {
                     Registro_compras.Add(cliente.Mi_nombre());
                     Registro_compras.Add(Carrito[i].Info_Producto());
-                    //Poner el horario de compra
+                    Registro_compras.Add(time);
 
                     Console.WriteLine("Su vuelto es de: " + (mi_dinero - total_a_pagar));
                 }
@@ -61,21 +63,14 @@ namespace Laboratorio3_Diego_Pincohet
             return Registro_compras;
         } 
         
-        public List<String> Ver_Registro_Compras(List<String> Registro_compras) //L
+        public void Ver_Registro_Compras(List<String> Registro_compras)
         {
-            List<String> ver_compras;
-            for(int x = 0; x < Registro_compras.Count; x++)
+            Console.WriteLine("Registro de compras: \n");
+            for (int x = 0; x < Registro_compras.Count; x++)
             {
-                ver_compras.Add(Registro_compras[x]);
-                return ver_compras;
+                Console.WriteLine(Registro_compras[x]);
             }
 
-
-
         }
-        
-        //No se si hacer una classe "Computador" que lleve el registro de compras(lista de productos, hora, nombre cliente)
-          // o ponerlo en Cajero.
-
     }
 }

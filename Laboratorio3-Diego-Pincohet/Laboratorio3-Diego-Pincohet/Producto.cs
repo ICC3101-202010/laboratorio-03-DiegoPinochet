@@ -12,7 +12,7 @@ namespace Laboratorio3_Diego_Pincohet
         private string Nombre;
         private string Marca;
         private int Stock_disponible;
-        private string Fecha_compra;
+        private string Fechas_compra;
 
         public Producto(int precio, string nombre, string marca, int stock_disponible, string fecha_compra)
         {
