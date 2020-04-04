@@ -6,18 +6,31 @@ using System.Threading.Tasks;
 
 namespace Laboratorio3_Diego_Pincohet
 {
-    class Jefes: Persona, IEmpleados
+    class Jefes: Empleados
     {
-        public int Sueldo { get => Sueldo; set => Sueldo = value; }
-        public string Puesto_de_Trabajo { get => Puesto_de_Trabajo; set => Puesto_de_Trabajo = value; }
-        public string Horario_de_Trabajo { get => Horario_de_Trabajo; set => Horario_de_Trabajo = value; }
-        public int Buen_Trabajo { get => Buen_Trabajo; set => Buen_Trabajo = value; }
+        public override int Sueldo { get; set; }
+        public override string Horario_de_Trabajo { get; set; }
+        public override string Puesto_de_Trabajo { get; set; }
+        public override int Buen_Trabajo { get; set; }
+
+        public Jefes(string name,string lastname,string rut, string date_of_birth, string nacionality, int sueldo, string horario, int buen_trabajo)
+        {
+            this.Nombre = name;
+            this.Apellido = lastname;
+            this.Rut = rut;
+            this.Fecha_de_Nacimiento = date_of_birth;
+            this.Nacionalidad = nacionality;
+            this.Sueldo = sueldo;
+            this.Horario_de_Trabajo = horario;
+            this.Buen_Trabajo = buen_trabajo;
+        }
 
         public int Cambiar_Sueldo()
         {
             if (Buen_Trabajo > 10)
             {
                 int nuevo_sueldo = Sueldo + 1000;
+                Buen_Trabajo = 0;
                 return nuevo_sueldo;
             }
             else if (Buen_Trabajo == 10)
@@ -32,14 +45,14 @@ namespace Laboratorio3_Diego_Pincohet
             }
 
         }
-        public string Cambiar_Trabajo()
-        {
-            //No se si ponerlos en jefe o no
-        }
+        //public string Cambiar_Trabajo()
+        //{
+            
+        //}
 
-        public string Cambiar_horario(string posible_horario, int ventas, string problema)
+        public string Cambiar_horario(string posible_horario, string problema)
         {
-            if (ventas > 10 || problema == "Universidad" || problema == "Medico")
+            if (Buen_Trabajo > 10 || problema == "Universidad" || problema == "Medico")
             {
                 string nuevo_horario = posible_horario;
                 return nuevo_horario;

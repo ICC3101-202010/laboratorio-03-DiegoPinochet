@@ -6,32 +6,49 @@ using System.Threading.Tasks;
 
 namespace Laboratorio3_Diego_Pincohet
 {
-    class Stock:IEmpleados
+    class Stock: Empleados
     {
-        public int Sueldo { get => Sueldo; set =>  Sueldo = value; }
-        public string Puesto_de_Trabajo { get => Puesto_de_Trabajo ; set => Puesto_de_Trabajo = value  ; }
-        public string Horario_de_Trabajo { get => Horario_de_Trabajo; set => Horario_de_Trabajo = value; }
-        public int Buen_Trabajo { get => Buen_Trabajo; set => Buen_Trabajo = value; }
+        private List<Producto> Lista_productos = new List<Producto>();
+        public override int Sueldo { get; set; }
+        public override string Horario_de_Trabajo { get; set; }
+        public override string Puesto_de_Trabajo { get; set; }
+        public override int Buen_Trabajo { get; set; }
+
+        public Stock(string name, string lastname, string rut, string date_of_birth, string nacionality, int sueldo, string horario, string puesto, int buen_trabajo, List<Producto> lista_productos)
+        {
+            this.Nombre = name;
+            this.Apellido = lastname;
+            this.Rut = rut;
+            this.Fecha_de_Nacimiento = date_of_birth;
+            this.Nacionalidad = nacionality;
+            this.Sueldo = sueldo;
+            this.Horario_de_Trabajo = horario;
+            this.Puesto_de_Trabajo = puesto;
+            this.Buen_Trabajo = buen_trabajo;
+            this.Lista_productos = lista_productos;    //Agregar todos los productos a esta lista.
+        }
 
         public bool Esta_en_Stock(Producto producto, int Cantidad)
         {
-            int almacen = 0;
 
-            if(producto._Stock_disponible() != 0 && producto._Stock_disponible() > Cantidad)
+            if(producto._Stock_disponible() != 0 && producto._Stock_disponible() >= Cantidad)
             {
-                almacen = producto._Stock_disponible() - Cantidad;
                 Buen_Trabajo = Buen_Trabajo + 1;
                 return true;
             }
             else
             {
                 Console.WriteLine(producto.Info_Producto() + " no esta en stock o queda menos de la cantidad que pidió.");
-                Console.WriteLine("Iremos a buscar más");
-                almacen = producto._Stock_disponible() + Cantidad;
-                Console.WriteLine("Intentelo de nuevo.");
                 return false;
             }
             
+        }
+        public void Nuevo_stock(int Cantidad)
+        {
+            for(int x = 0; x < Lista_productos.Count; x++)
+            {
+                Console.WriteLine(Lista_productos[x].Info_Producto() + ". Su nuevo stock es de: " + Lista_productos[x]._Stock_disponible());
+            } 
         }
     }
 }

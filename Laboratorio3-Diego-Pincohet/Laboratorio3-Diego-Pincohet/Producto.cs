@@ -12,15 +12,13 @@ namespace Laboratorio3_Diego_Pincohet
         private string Nombre;
         private string Marca;
         private int Stock_disponible;
-        private string Fechas_compra;
 
-        public Producto(int precio, string nombre, string marca, int stock_disponible, string fecha_compra)
+        public Producto(int precio, string nombre, string marca, int stock_disponible)
         {
             this.Precio = precio;
             this.Nombre = nombre;
             this.Marca = marca;
             this.Stock_disponible = stock_disponible;
-            this.Fecha_compra = fecha_compra;
         }
         public string Info_Producto()
         {
@@ -37,10 +35,10 @@ namespace Laboratorio3_Diego_Pincohet
             int Almacen = Stock_disponible;
             return Almacen;
         }
-
-
-
-
+        public void Nuevo_stock(int Cantidad)
+        {
+            Stock_disponible = Stock_disponible - Cantidad;
+        }
 
     }
 }

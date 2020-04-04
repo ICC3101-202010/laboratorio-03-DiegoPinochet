@@ -6,33 +6,43 @@ using System.Threading.Tasks;
 
 namespace Laboratorio3_Diego_Pincohet
 {
-    class Cajeros: IEmpleados
+    class Cajeros: Empleados
     {
-        private string Horario_compra;
-        private List<String> Registro_compras;
-        public Cajeros(string horario_de_compra, List<String> registro_compras)
-        {
-            this.Horario_compra = horario_de_compra;
-            this.Registro_compras = registro_compras;
-        }
+        public override int Sueldo { get; set; }
+        public override string Horario_de_Trabajo { get; set; }
+        public override string Puesto_de_Trabajo { get; set; }
+        public override int Buen_Trabajo { get; set; }
 
-        public int Sueldo { get => Sueldo; set => Sueldo = value; }
-        public string Puesto_de_Trabajo { get => Puesto_de_Trabajo; set => Puesto_de_Trabajo = value; }
-        public string Horario_de_Trabajo { get => Horario_de_Trabajo; set => Horario_de_Trabajo = value; }
-        public int Buen_Trabajo { get => Buen_Trabajo; set => Buen_Trabajo = value; }
+        public Cajeros(string name, string lastname, string rut, string date_of_birth,string nacionality, int sueldo, string horario, string puesto, int buen_trabajo)
+        {
+            this.Nombre = name;
+            this.Apellido = lastname;
+            this.Rut = rut;
+            this.Fecha_de_Nacimiento = date_of_birth;
+            this.Nacionalidad = nacionality;
+            this.Sueldo = sueldo;
+            this.Horario_de_Trabajo = horario;
+            this.Puesto_de_Trabajo = puesto;
+            this.Buen_Trabajo = buen_trabajo;
+
+        }
 
         public int Cuanto_Saldra(List<Producto> Carrito) // El carrito que sale del metodo cliente.Agregar()
         {
             int dinero = 0;
             for (int i = 0; i < Carrito.Count; i++)
             {
-                dinero = dinero + Carrito[i].Price();
+                int val = Carrito[i].Price();
+                dinero += val;
             }
             Buen_Trabajo = Buen_Trabajo + 1;
             return dinero;
             
+            
+            
+            
         }
-        public List<String> Pagar(int total_a_pagar, Clientes cliente, Producto producto, List<Producto> Carrito)
+        public List<String> Pagar(int total_a_pagar, Clientes cliente, Producto producto, List<Producto> Carrito, List<String> Registro_compras,int Cantidad) //total_a_pagar viene de Cuanto_saldra()
         {
             int mi_dinero = cliente.Mi_Efectivo();
             string time = "Fecha: "+ DateTime.Today.ToShortDateString() + " Hora:" + DateTime.Now.ToShortTimeString();
@@ -42,16 +52,25 @@ namespace Laboratorio3_Diego_Pincohet
 
                 if (total_a_pagar == mi_dinero)
                 {
-
-                    Registro_compras.Add(cliente.Mi_nombre());
+                    Registro_compras.Add("Nombre Cliente: " + cliente.Mi_nombre());
+                    Registro_compras.Add("Productos: ");
                     Registro_compras.Add(Carrito[i].Info_Producto());
-                    Registro_compras.Add(time);
+                    Registro_compras.Add("Fecha y hora: " + time);
+                    string Name = Nombre + " " + Apellido;
+                    Registro_compras.Add("Atendido por: " + Name);
+                    producto.Nuevo_stock(Cantidad);
+
+
                 }
                 else if (total_a_pagar < mi_dinero)
                 {
-                    Registro_compras.Add(cliente.Mi_nombre());
+                    Registro_compras.Add("Nombre Cliente: " + cliente.Mi_nombre());
+                    Registro_compras.Add("Productos: ");
                     Registro_compras.Add(Carrito[i].Info_Producto());
-                    Registro_compras.Add(time);
+                    Registro_compras.Add("Fecha y hora: " + time);
+                    string Name = Nombre + " " + Apellido;
+                    Registro_compras.Add("Atendido por: " + Name);
+                    producto.Nuevo_stock(Cantidad);
 
                     Console.WriteLine("Su vuelto es de: " + (mi_dinero - total_a_pagar));
                 }

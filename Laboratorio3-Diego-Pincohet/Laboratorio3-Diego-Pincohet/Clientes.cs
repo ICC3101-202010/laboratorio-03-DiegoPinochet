@@ -8,10 +8,10 @@ namespace Laboratorio3_Diego_Pincohet
 {
     class Clientes: Persona
     {
-        private string Carrito_de_Compras;
+        private List<Producto> Carrito_de_Compras;
         private int Mi_Dinero;
 
-        public Clientes(string name, string lastname, string rut, string date_of_birth, string nacionality, int mi_dinero, string carrito_de_compras)
+        public Clientes(string name, string lastname, string rut, string date_of_birth, string nacionality, int mi_dinero, List<Producto> carrito_de_compras)
         {
             this.Nombre = name;
             this.Apellido = lastname;
@@ -20,18 +20,23 @@ namespace Laboratorio3_Diego_Pincohet
             this.Nacionalidad = nacionality;
             this.Mi_Dinero = mi_dinero;
             this.Carrito_de_Compras = carrito_de_compras;
+
         }
 
-        public List<Producto> Agregar_Producto(Producto producto, List<Producto> Carrito, Stock stock, int Cantidad_de_Productos)
-        {
-            if(stock.Esta_en_Stock(producto, Cantidad_de_Productos) == true)
+        public List<Producto> Agregar_Producto(Producto producto, Stock stock, int Cantidad_de_Productos)
+        {  
+
+            if (stock.Esta_en_Stock(producto, Cantidad_de_Productos) == true)
             {
-                Carrito.Add(producto);
-                return Carrito;
+                for(int x = 0; x < Cantidad_de_Productos; x++)
+                {
+                    Carrito_de_Compras.Add(producto);
+                }
+                return Carrito_de_Compras;
             }
             else
             {
-                return Carrito;
+                return Carrito_de_Compras;
             }
 ;
         }
@@ -45,6 +50,11 @@ namespace Laboratorio3_Diego_Pincohet
         {
             string name = Nombre + " " + Apellido;
             return name;
+        }
+        public string Info_Clientes()
+        {
+            string info = Nombre + " " + Apellido + " " + Rut + " " + Fecha_de_Nacimiento + " " + Nacionalidad + " " + Mi_Dinero;
+            return info;
         }
         
     }

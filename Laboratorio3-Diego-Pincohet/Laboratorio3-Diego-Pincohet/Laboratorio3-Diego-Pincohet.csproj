@@ -45,7 +45,7 @@
   <ItemGroup>
     <Compile Include="Cajeros.cs" />
     <Compile Include="Clientes.cs" />
-    <Compile Include="Empleados.cs" />
+    <Compile Include="IEmpleados.cs" />
     <Compile Include="Jefes.cs" />
     <Compile Include="Persona.cs" />
     <Compile Include="Producto.cs" />
