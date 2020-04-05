@@ -47,39 +47,48 @@ namespace Laboratorio3_Diego_Pincohet
             int mi_dinero = cliente.Mi_Efectivo();
             string time = "Fecha: "+ DateTime.Today.ToShortDateString() + " Hora:" + DateTime.Now.ToShortTimeString();
 
-            for (int i = 0; i < Carrito.Count; i++)
+            if (total_a_pagar == mi_dinero)
             {
-
-                if (total_a_pagar == mi_dinero)
+                Registro_compras.Add("Nombre Cliente: " + cliente.Mi_nombre());
+                Registro_compras.Add("Productos: ");
+                for (int i = 0; i < Carrito.Count; i++)
                 {
-                    Registro_compras.Add("Nombre Cliente: " + cliente.Mi_nombre());
-                    Registro_compras.Add("Productos: ");
                     Registro_compras.Add(Carrito[i].Info_Producto());
-                    Registro_compras.Add("Fecha y hora: " + time);
-                    string Name = Nombre + " " + Apellido;
-                    Registro_compras.Add("Atendido por: " + Name);
-                    producto.Nuevo_stock(Cantidad);
+                }
+                Registro_compras.Add("Fecha y hora: " + time);
+                string Name = Nombre + " " + Apellido;
+                Registro_compras.Add("Atendido por: " + Name);
+                producto.Nuevo_stock(Cantidad);
+                cliente.New_Dinero(Carrito[0], Cantidad);
 
 
-                }
-                else if (total_a_pagar < mi_dinero)
-                {
-                    Registro_compras.Add("Nombre Cliente: " + cliente.Mi_nombre());
-                    Registro_compras.Add("Productos: ");
-                    Registro_compras.Add(Carrito[i].Info_Producto());
-                    Registro_compras.Add("Fecha y hora: " + time);
-                    string Name = Nombre + " " + Apellido;
-                    Registro_compras.Add("Atendido por: " + Name);
-                    producto.Nuevo_stock(Cantidad);
-
-                    Console.WriteLine("Su vuelto es de: " + (mi_dinero - total_a_pagar));
-                }
-                else
-                {
-                    Console.WriteLine("Excede Máximo...");
-                }
+                return Registro_compras;
             }
-            return Registro_compras;
+            else if (total_a_pagar < mi_dinero)
+            {
+                Registro_compras.Add("Nombre Cliente: " + cliente.Mi_nombre());
+                Registro_compras.Add("Productos: ");
+                for (int i = 0; i < Carrito.Count; i++)
+                {
+                    Registro_compras.Add(Carrito[i].Info_Producto());
+                    cliente.New_Dinero(Carrito[i]);
+
+                }
+                Registro_compras.Add("Fecha y hora: " + time);
+                string Name = Nombre + " " + Apellido;
+                Registro_compras.Add("Atendido por: " + Name);
+                producto.Nuevo_stock(Cantidad);
+
+                Console.WriteLine("Su vuelto es de: " + (mi_dinero - total_a_pagar));
+
+                return Registro_compras;
+            }
+            else
+            {
+                Console.WriteLine("Excede Máximo...");
+                return Registro_compras;
+            }
+
         } 
         
         public void Ver_Registro_Compras(List<String> Registro_compras)

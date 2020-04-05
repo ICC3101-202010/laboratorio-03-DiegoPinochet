@@ -23,7 +23,7 @@ namespace Laboratorio3_Diego_Pincohet
 
             while (x == true)
             {
-                Console.WriteLine("Elige si quieres crear clientes(1), crear productos(2), crear empleados(3), empezar la simulación(4) o hacer una simulacion aleatoria(5).");
+                Console.WriteLine("Elige si quieres crear clientes(1), crear productos(2), crear empleados(3), empezar la simulación(4), hacer una simulacion aleatoria(5) o cerrar el programa(6).");
                 string eleccion = Console.ReadLine();
                 if (eleccion == "1")
                 {
@@ -155,14 +155,14 @@ namespace Laboratorio3_Diego_Pincohet
                         Console.WriteLine("Cuantos productos de este tipo desea comprar? 1, 2, etc.");
                         int cant = int.Parse(Console.ReadLine());
 
-                        List<Producto> lista_carrito = cliente.Agregar_Producto(producto, lista_stock[0] ,cant);
-
-                        Console.WriteLine("Qué cajero realizará la venta? cajero1(1), cajero2(2), etc.");
-                        int caj = int.Parse(Console.ReadLine());
-                        Cajeros cajeros = lista_cajeros[caj - 1];
+                        List<Producto> lista_carrito = cliente.Agregar_Producto(producto, lista_stock[0], cant);   
 
                         if (lista_carrito.Count != 0)
                         {
+                            Console.WriteLine("Qué cajero realizará la venta? cajero1(1), cajero2(2), etc.");
+                            int caj = int.Parse(Console.ReadLine());
+                            Cajeros cajeros = lista_cajeros[caj - 1];
+
                             int total_a_pagar = cajeros.Cuanto_Saldra(lista_carrito);
                             List<String> Registro_de_compras = cajeros.Pagar(total_a_pagar, cliente, producto, lista_carrito, Registro_compras, cant);
 

@@ -36,6 +36,7 @@ namespace Laboratorio3_Diego_Pincohet
             }
             else
             {
+                List<Producto> Carrito_de_Compras = new List<Producto>();
                 return Carrito_de_Compras;
             }
 ;
@@ -45,6 +46,10 @@ namespace Laboratorio3_Diego_Pincohet
         {
             int dinero = Mi_Dinero;
             return dinero;
+        }
+        public void New_Dinero(Producto producto, int Cant)
+        {
+            Mi_Dinero = Mi_Dinero - (producto.Price() * Cant);
         }
         public string Mi_nombre()
         {
