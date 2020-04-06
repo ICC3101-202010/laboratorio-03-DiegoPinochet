@@ -19,11 +19,12 @@ namespace Laboratorio3_Diego_Pincohet
             List<Cajeros> lista_cajeros = new List<Cajeros>();
             List<Jefes> lista_jefes = new List<Jefes>();
             List<String> Registro_compras = new List<string>();
+            List<Auxiliar> lista_auxiliar = new List<Auxiliar>();
 
 
             while (x == true)
             {
-                Console.WriteLine("Elige si quieres crear clientes(1), crear productos(2), crear empleados(3), empezar la simulación(4), hacer una simulacion aleatoria(5) o cerrar el programa(6).");
+                Console.WriteLine("Elige si quieres crear clientes(1), crear productos(2), crear empleados(3), utilizar metodos de cambio de sueldo, horario o puesto (4) empezar la simulación(5), hacer una simulacion aleatoria(6) o cerrar el programa(7).");
                 string eleccion = Console.ReadLine();
                 if (eleccion == "1")
                 {
@@ -64,12 +65,12 @@ namespace Laboratorio3_Diego_Pincohet
                 }
                 else if (eleccion == "3")
                 {
-                    Console.WriteLine("Qué tipo de empleado quieres crear? (Jefes, Cajeros, Stock)");
+                    Console.WriteLine("Qué tipo de empleado quieres crear? (Jefes, Cajeros, Stock o Auxiliar)");
                     string empleado = Console.ReadLine();
-                    if(empleado == "Jefes")
+                    if (empleado == "Jefes")
                     {
-                        
-                        for(int i = 0; i < 1; i++)
+
+                        for (int i = 0; i < 1; i++)
                         {
                             Console.WriteLine("Crea un jefe nuevo (nombre, apellido, rut, fecha de nacimiento, nacionalidad, sueldo, horario)\n"); //creación jefes
                             string Name = Console.ReadLine();
@@ -83,13 +84,37 @@ namespace Laboratorio3_Diego_Pincohet
 
                             Jefes jefes = new Jefes(Name, LastName, Rut, Año_de_Nacimiento, Nacionalidad, Sueldo, Horario, Buen_trabajo);
                             lista_jefes.Add(jefes);
-                            
+
                         }
 
                     }
-                    else if(empleado == "Cajeros")
+                    else if (empleado == "Auxiliar")
                     {
-                        
+
+                        Console.WriteLine("Cuantos Axuliares quiere crear?");
+                        int cant_auxiliar = int.Parse(Console.ReadLine());
+
+                        for (int i = 0; i < cant_auxiliar; i++)
+                        {
+                            Console.WriteLine("Crea un auxiliar nuevo (nombre, apellido, rut, fecha de nacimiento, nacionalidad, sueldo, horario)\n"); // creación auxiliar
+                            string Name = Console.ReadLine();
+                            string LastName = Console.ReadLine();
+                            string Rut = Console.ReadLine();
+                            string Año_de_Nacimiento = Console.ReadLine();
+                            string Nacionalidad = Console.ReadLine();
+                            int Sueldo = int.Parse(Console.ReadLine());
+                            string Horario = Console.ReadLine();
+                            string Puesto = empleado;
+                            int Buen_trabajo = 0;
+
+                            Auxiliar auxiliar = new Auxiliar(Name, LastName, Rut, Año_de_Nacimiento, Nacionalidad, Sueldo, Horario, Puesto, Buen_trabajo);
+                            lista_auxiliar.Add(auxiliar);
+                        }
+                    }
+
+                    else if (empleado == "Cajeros")
+                    {
+
                         Console.WriteLine("Cuantos Cajeros quiere crear?");
                         int cant_cajeros = int.Parse(Console.ReadLine());
 
@@ -110,7 +135,7 @@ namespace Laboratorio3_Diego_Pincohet
                             lista_cajeros.Add(cajeros);
                         }
                     }
-                    else if(empleado == "Stock")
+                    else if (empleado == "Stock")
                     {
                         for (int i = 0; i < 1; i++)
                         {
@@ -131,7 +156,77 @@ namespace Laboratorio3_Diego_Pincohet
                         }
                     }
                 }
-                else if (eleccion == "4")
+                else if(eleccion == "4")
+                {
+                    Console.WriteLine("A que tipo de empleado quiere hacerle un cambio de atributos? (Cajeros, Stock o Auxiliar)");
+                    string empleado = Console.ReadLine();
+                    Console.WriteLine("Qué atributo quiere cambiar? (Sueldo, Horario o Puesto)");
+                    string atributo = Console.ReadLine();
+                    if (empleado == "Cajeros")
+                    {
+                        if(atributo == "Sueldo")
+                        {
+                            lista_jefes[0].Cambiar_Sueldo();
+                        }
+                        else if (atributo == "Horario")
+                        {
+                            Console.WriteLine("Cual es su propuesta de horario de trabajo?");
+                            string posible_horario = Console.ReadLine();
+                            Console.WriteLine("Porqué desea cambiar el horario? (Universidad, Medico, etc.)");
+                            string problema = Console.ReadLine();
+                            lista_jefes[0].Cambiar_horario(posible_horario, problema);
+                        }
+                        else
+                        {
+                            Console.WriteLine("A que cajero quiere cambiar de trabajo? (1,2,3,etc.)");
+                            int num = int.Parse(Console.ReadLine());
+                            // mtere el metodo de cambio de puesto
+                        }
+                    }
+
+                    else if (empleado == "Stock")
+                    {
+                        if (atributo == "Sueldo")
+                        {
+                            lista_jefes[0].Cambiar_Sueldo();
+                        }
+                        else if (atributo == "Horario")
+                        {
+                            Console.WriteLine("Cual es su propuesta de horario de trabajo?");
+                            string posible_horario = Console.ReadLine();
+                            Console.WriteLine("Porqué desea cambiar el horario? (Universidad, Medico, etc.)");
+                            string problema = Console.ReadLine();
+                            lista_jefes[0].Cambiar_horario(posible_horario, problema);
+                        }
+                        else
+                        {
+                            Console.WriteLine("A que cajero quiere cambiar de trabajo? (1,2,3,etc.)");
+                            int num = int.Parse(Console.ReadLine());
+                            Console.WriteLine("A que puesto quiere cambiarlo? (Stock o Auxiliar)");
+                        }
+                    }
+
+                    else
+                    {
+                        if (atributo == "Sueldo")
+                        {
+                            lista_jefes[0].Cambiar_Sueldo();
+                        }
+                        else if (atributo == "Horario")
+                        {
+                            Console.WriteLine("Cual es su propuesta de horario de trabajo?");
+                            string posible_horario = Console.ReadLine();
+                            Console.WriteLine("Porqué desea cambiar el horario? (Universidad, Medico, etc.)");
+                            string problema = Console.ReadLine();
+                            lista_jefes[0].Cambiar_horario(posible_horario,problema);
+                        }
+                        else
+                        {
+
+                        }
+                    }
+                }
+                else if (eleccion == "5")
                 {
                     bool i = true;
                     
@@ -173,6 +268,11 @@ namespace Laboratorio3_Diego_Pincohet
                             Console.WriteLine("Agregue elementos al carrito.");
                         }
 
+                        if(lista_auxiliar.Count != 0)
+                        {
+                            lista_auxiliar[0].Limpiar();
+                        }
+
                         Console.WriteLine("Quiere que otro cliente realice una compra? Si o No");
                         string dec = Console.ReadLine();
                         if(dec == "Si")
@@ -186,7 +286,7 @@ namespace Laboratorio3_Diego_Pincohet
                         }
                     }
                 }
-                else if(eleccion == "5")
+                else if(eleccion == "6")
                 {
                     
                 }
