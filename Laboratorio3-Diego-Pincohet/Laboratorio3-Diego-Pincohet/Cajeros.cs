@@ -71,13 +71,14 @@ namespace Laboratorio3_Diego_Pincohet
                 for (int i = 0; i < Carrito.Count; i++)
                 {
                     Registro_compras.Add(Carrito[i].Info_Producto());
-                    cliente.New_Dinero(Carrito[i]);
+                    cliente.New_Dinero(Carrito[i],Cantidad);
 
                 }
                 Registro_compras.Add("Fecha y hora: " + time);
                 string Name = Nombre + " " + Apellido;
                 Registro_compras.Add("Atendido por: " + Name);
                 producto.Nuevo_stock(Cantidad);
+                cliente.New_Dinero(Carrito[0], Cantidad);
 
                 Console.WriteLine("Su vuelto es de: " + (mi_dinero - total_a_pagar));
 
@@ -85,7 +86,7 @@ namespace Laboratorio3_Diego_Pincohet
             }
             else
             {
-                Console.WriteLine("Excede Máximo...");
+                Console.WriteLine("Excede Máximo... No se pudo realizar la compra de: " + cliente.Mi_nombre());
                 return Registro_compras;
             }
 
@@ -93,12 +94,19 @@ namespace Laboratorio3_Diego_Pincohet
         
         public void Ver_Registro_Compras(List<String> Registro_compras)
         {
-            Console.WriteLine("Registro de compras: \n");
-            for (int x = 0; x < Registro_compras.Count; x++)
+            Console.WriteLine("\nRegistro de compras: ");
+            if (Registro_compras.Count() != 0)
             {
-                Console.WriteLine(Registro_compras[x]);
-            }
+                for (int x = 0; x < Registro_compras.Count; x++)
+                {
+                    Console.WriteLine(Registro_compras[x]);
 
+                }
+            }
+            else
+            {
+                Console.WriteLine("");
+            }
         }
     }
 }

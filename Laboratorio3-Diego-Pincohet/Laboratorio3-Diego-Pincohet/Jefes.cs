@@ -46,27 +46,6 @@ namespace Laboratorio3_Diego_Pincohet
 
         }
 
-        public string Cambiar_Trabajo()
-        {
-            Console.WriteLine("A que trabajo quieres cambia? (Stock, Cajero, Auxiliar)");
-            string trabajo = Console.ReadLine();
-            if(trabajo == "Stock")
-            {
-                Puesto_de_Trabajo = trabajo;
-                return Puesto_de_Trabajo;
-            }
-            else if (trabajo == "Cajero")
-            {
-                Puesto_de_Trabajo = trabajo;
-                return Puesto_de_Trabajo;
-            }
-            else
-            {
-                Puesto_de_Trabajo = trabajo;
-                return Puesto_de_Trabajo;
-            }
-        }
-
         public string Cambiar_horario(string posible_horario, string problema)
         {
             if (Buen_Trabajo > 10 || problema == "Universidad" || problema == "Medico")

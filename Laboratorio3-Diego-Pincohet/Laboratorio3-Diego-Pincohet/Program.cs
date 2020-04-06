@@ -21,6 +21,14 @@ namespace Laboratorio3_Diego_Pincohet
             List<String> Registro_compras = new List<string>();
             List<Auxiliar> lista_auxiliar = new List<Auxiliar>();
 
+            List<Clientes> list_clientes = new List<Clientes>();
+            List<Producto> list_productos = new List<Producto>();
+            List<Stock> list_stock = new List<Stock>();
+            List<Cajeros> list_cajeros = new List<Cajeros>();
+            List<Jefes> list_jefes = new List<Jefes>();
+            List<String> registro_compras = new List<string>();
+            List<Auxiliar> list_auxiliar = new List<Auxiliar>();
+
 
             while (x == true)
             {
@@ -180,7 +188,7 @@ namespace Laboratorio3_Diego_Pincohet
                         {
                             Console.WriteLine("A que cajero quiere cambiar de trabajo? (1,2,3,etc.)");
                             int num = int.Parse(Console.ReadLine());
-                            // mtere el metodo de cambio de puesto
+                            lista_cajeros[num - 1].Cambiar_Trabajo();
                         }
                     }
 
@@ -202,7 +210,7 @@ namespace Laboratorio3_Diego_Pincohet
                         {
                             Console.WriteLine("A que cajero quiere cambiar de trabajo? (1,2,3,etc.)");
                             int num = int.Parse(Console.ReadLine());
-                            Console.WriteLine("A que puesto quiere cambiarlo? (Stock o Auxiliar)");
+                            lista_stock[num - 1].Cambiar_Trabajo();
                         }
                     }
 
@@ -222,7 +230,9 @@ namespace Laboratorio3_Diego_Pincohet
                         }
                         else
                         {
-
+                            Console.WriteLine("A que cajero quiere cambiar de trabajo? (1,2,3,etc.)");
+                            int num = int.Parse(Console.ReadLine());
+                            lista_auxiliar[num - 1].Cambiar_Trabajo();
                         }
                     }
                 }
@@ -265,7 +275,8 @@ namespace Laboratorio3_Diego_Pincohet
                         }
                         else
                         {
-                            Console.WriteLine("Agregue elementos al carrito.");
+                            Console.WriteLine(producto.Info_Producto() + " no esta en stock o queda menos de la cantidad que pidió. No se pudo agregar el producto.\n");
+                            Console.WriteLine("No hay productos en el carro. No se pudo realizar la compra de: " + cliente.Mi_nombre());
                         }
 
                         if(lista_auxiliar.Count != 0)
@@ -282,13 +293,119 @@ namespace Laboratorio3_Diego_Pincohet
                         }
                         else
                         {
-                            break;
+                           Registro_compras.Clear();
+                           lista_auxiliar.Clear();
+                           lista_cajeros.Clear();
+                           lista_clientes.Clear();
+                           lista_jefes.Clear();
+                           lista_productos.Clear();
+                           lista_stock.Clear();
+                           break;
                         }
                     }
                 }
                 else if(eleccion == "6")
                 {
-                    
+                    Random random = new Random();
+
+                    List<string> nombres = new List<string>() {"Diego","Matias","Tomas","Pancho","Juan","Valeria","Valentina","Jacobo","Álvaro","Pablo" };
+                    List<string> apellidos = new List<string>() {"Leguer","Giraldo","Ruiz-Tagle","Pinochet","Sinsay","Álvarez","Fuentes","Cabrera","Seguel","Nazal" };
+                    List<string> rut = new List<string>() {"","","","","","","","","","","","","","","" };
+                    List<string> fecha_nacimiento = new List<string>() {"","","","","" };
+                    List<string> nacionalidad = new List<string>() {"","","","","" };
+                    List<int> dinero = new List<int>() {5000,10000,15000,8000,2000 };
+
+                    List<Producto> carrito = new List<Producto>(); // no se si hacerla de nuevo o dejarla
+
+                    List<int> sueldos = new List<int>() {200,300,400,500 };
+                    List<string> horario = new List<string>() {"11:30-20:30","8:30-15:30","15:30-22:30" };
+
+                    List<Producto> stock_productos = new List<Producto>(); // no se si hacerla de nuevo o dejarla
+
+                    int buen_trabajo = 0;
+                    List<string> nombre_product = new List<string>() {"Snicker","Coca-Cola","Sprite","Fanta","MilkyWay","Twix","Chocapic","Fajitas","Zucaritas","Pillows","Powerade","Pan de molde","Marraqueta","Hallulla","Salsa","Coca-Cola light","Coca-cola zero","Coca-cola life","Fanta Zero","Sprite Zero","Aquarius","Vital","Cola-Cao","Nesquik","Milo","Froot Loops","Pan frica","Dobladita","Baguetta","Ciabatta" };
+                    List<string> marca_product = new List<string>() {"Coca-Cola Company","Marse","Bimbo","Pancho Villa","Nestlé" }; // 5 marcas distintas
+                    List<int> precio_product = new List<int>() {500, 1500, 3000, 3500, 4500,6000}; //6 precios distintos
+                    List<int> stock_product = new List<int>() { 1, 2, 3, 4 };
+
+
+                    for (int i = 0; i < 15; i++) //creación de clientes
+                    {
+                        Clientes clientes = new Clientes(nombres[random.Next(10)],apellidos[random.Next(10)],rut[random.Next(15)],fecha_nacimiento[random.Next(5)],nacionalidad[random.Next(5)],dinero[random.Next(5)],carrito);
+                        list_clientes.Add(clientes);
+                    }
+
+                    for(int i = 0; i < 1; i++) // creación de jefes
+                    {
+                        Jefes jefes = new Jefes(nombres[random.Next(10)], apellidos[random.Next(10)], rut[random.Next(15)], fecha_nacimiento[random.Next(5)], nacionalidad[random.Next(5)],sueldos[random.Next(4)],horario[random.Next(3)],buen_trabajo);
+                        list_jefes.Add(jefes);
+                    }
+
+                    for (int i = 0; i < 2; i++) // creación de stock
+                    {
+                        Stock stock = new Stock(nombres[random.Next(10)], apellidos[random.Next(10)], rut[random.Next(15)], fecha_nacimiento[random.Next(5)], nacionalidad[random.Next(5)], sueldos[random.Next(4)], horario[random.Next(3)],"Stock" ,buen_trabajo, stock_productos);
+                        list_stock.Add(stock);
+                    }
+                    for (int i = 0; i < 3; i++) // creación de cajeros
+                    {
+                        Cajeros cajeros = new Cajeros(nombres[random.Next(10)], apellidos[random.Next(10)], rut[random.Next(15)], fecha_nacimiento[random.Next(5)], nacionalidad[random.Next(5)], sueldos[random.Next(4)], horario[random.Next(3)], "Cajero" ,buen_trabajo);
+                        list_cajeros.Add(cajeros);
+                    }
+                    for (int i = 0; i < 1; i++) // creación de auxiliares
+                    {
+                        Auxiliar auxiliar = new Auxiliar(nombres[random.Next(10)], apellidos[random.Next(10)], rut[random.Next(15)], fecha_nacimiento[random.Next(5)], nacionalidad[random.Next(5)], sueldos[random.Next(4)], horario[random.Next(3)], "Auxiliar",buen_trabajo);
+                        list_auxiliar.Add(auxiliar);
+                    }
+
+
+                    for (int i = 0; i < 30; i++) // creación de productos
+                    {
+                        Producto prod = new Producto(precio_product[random.Next(6)],nombre_product[random.Next(30)],marca_product[random.Next(5)],stock_product[random.Next(4)]);
+                        list_productos.Add(prod);
+                    }
+
+                    for (int i = 0; i < 5; i++)
+                    {
+                        Producto producto1 = list_productos[random.Next(30)]; // elegir un producto de la lista producto
+                        int cantidad = random.Next(4); //elegir la cantidad de producto
+
+                        Clientes cliente = list_clientes[random.Next(15)]; // elegir de manera random que cliente va a comprar
+                        List<Producto> cart = cliente.Agregar_Producto(producto1, list_stock[random.Next(2)], cantidad); //elegir stock que se ocupar
+
+                        if (cart.Count() != 0)
+                        {
+                            Cajeros cajeros = list_cajeros[random.Next(3)]; // que cajero hara la venta
+
+                            int total_a_pagar = cajeros.Cuanto_Saldra(cart);
+                            List<String> registro_de_compras = cajeros.Pagar(total_a_pagar, cliente, producto1, cart, registro_compras, cantidad);
+
+                            cajeros.Ver_Registro_Compras(registro_de_compras);
+
+                            cart.Clear();
+                            
+                        }
+                        else
+                        {
+                            Console.WriteLine(producto1.Info_Producto() + " no esta en stock o queda menos de la cantidad que pidió. No se pudo agregar el producto.\n");
+                            Console.WriteLine("No hay productos en el carro. No se pudo realizar la compra de: " + cliente.Mi_nombre());
+                        }
+                        Console.WriteLine("--------------------------------------------------\n");
+                    }
+
+                    //Veremos nuevo stock
+                    Console.WriteLine("--------------------------------------------------------------------------\n");
+                    Console.WriteLine("Nuevo Stock: ");
+                    for(int i = 0; i < list_productos.Count(); i++)
+                    {
+                        Console.WriteLine(list_productos[i].Info_Producto() + ". Stock: " + list_productos[i]._Stock_disponible());
+                    }
+                    registro_compras.Clear();
+                    list_auxiliar.Clear();
+                    list_cajeros.Clear();
+                    list_clientes.Clear();
+                    list_jefes.Clear();
+                    list_productos.Clear();
+                    list_stock.Clear();
                 }
                 else
                 {

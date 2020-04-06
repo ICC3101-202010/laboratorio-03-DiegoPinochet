@@ -25,7 +25,6 @@ namespace Laboratorio3_Diego_Pincohet
 
         public List<Producto> Agregar_Producto(Producto producto, Stock stock, int Cantidad_de_Productos)
         {  
-
             if (stock.Esta_en_Stock(producto, Cantidad_de_Productos) == true)
             {
                 for(int x = 0; x < Cantidad_de_Productos; x++)

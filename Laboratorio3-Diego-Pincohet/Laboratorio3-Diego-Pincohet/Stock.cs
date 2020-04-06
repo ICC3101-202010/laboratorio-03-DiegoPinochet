@@ -31,14 +31,14 @@ namespace Laboratorio3_Diego_Pincohet
         public bool Esta_en_Stock(Producto producto, int Cantidad)
         {
 
-            if(producto._Stock_disponible() != 0 && producto._Stock_disponible() >= Cantidad)
+            if((producto._Stock_disponible() != 0) && (producto._Stock_disponible() >= Cantidad))
             {
                 Buen_Trabajo = Buen_Trabajo + 1;
                 return true;
             }
             else
             {
-                Console.WriteLine(producto.Info_Producto() + " no esta en stock o queda menos de la cantidad que pidió.");
+                
                 return false;
             }
             
