@@ -32,5 +32,10 @@ namespace Laboratorio3_Diego_Pincohet
             Console.WriteLine("Ire a limpiar el supermercado.");
             Buen_Trabajo += 1;
         }
+        public string Info_Auxiliar()
+        {
+            string info = Nombre + " " + Apellido + " " + Rut + " " + Fecha_de_Nacimiento + " " + Nacionalidad + " " + Sueldo + " " + Horario_de_Trabajo + " " + Puesto_de_Trabajo + ".";
+            return info;
+        }
     }
 }

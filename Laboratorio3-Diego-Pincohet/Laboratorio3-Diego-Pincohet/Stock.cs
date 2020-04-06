@@ -43,6 +43,11 @@ namespace Laboratorio3_Diego_Pincohet
             }
             
         }
+        public string Info_Stock()
+        {
+            string info = Nombre + " " + Apellido + " " + Rut + " " + Fecha_de_Nacimiento + " " + Nacionalidad + " " + Sueldo + " " + Horario_de_Trabajo + " " + Puesto_de_Trabajo + ".";
+            return info;
+        }
         public void Nuevo_stock(int Cantidad)
         {
             for(int x = 0; x < Lista_productos.Count; x++)

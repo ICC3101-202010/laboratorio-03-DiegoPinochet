@@ -13,24 +13,25 @@ namespace Laboratorio3_Diego_Pincohet
         public abstract string Puesto_de_Trabajo { get; set; }
         public abstract int Buen_Trabajo { get; set; }
 
-        public string Cambiar_Trabajo()
+        public void Cambiar_Trabajo(string name, string lastname, string rut, string date_of_birth, string nacionality, int sueldo, string horario, string puesto, int buen_trabajo,List<Producto>lista_productos,List<Cajeros>lista_cajeros,List<Stock>lista_stock, List<Auxiliar>lista_auxiliar)
         {
             Console.WriteLine("A que trabajo quieres cambiar? (Stock, Cajero, Auxiliar)");
             string trabajo = Console.ReadLine();
             if (trabajo == "Stock")
             {
-                Puesto_de_Trabajo = trabajo;
-                return Puesto_de_Trabajo;
+                Stock stock = new Stock(name, lastname, rut, date_of_birth, nacionality, sueldo, horario, puesto, buen_trabajo, lista_productos);
+                lista_stock.Add(stock);
+                
             }
             else if (trabajo == "Cajero")
             {
-                Puesto_de_Trabajo = trabajo;
-                return Puesto_de_Trabajo;
+                Cajeros cajero = new Cajeros(name, lastname, rut, date_of_birth, nacionality, sueldo, horario, puesto, buen_trabajo);
+                lista_cajeros.Add(cajero);
             }
             else
             {
-                Puesto_de_Trabajo = trabajo;
-                return Puesto_de_Trabajo;
+                Auxiliar auxiliar = new Auxiliar(name, lastname, rut, date_of_birth, nacionality, sueldo, horario, puesto, buen_trabajo);
+                lista_auxiliar.Add(auxiliar);
             }
         }
 

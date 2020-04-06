@@ -60,5 +60,10 @@ namespace Laboratorio3_Diego_Pincohet
                 return nuevo_horario;
             }
         }
+        public string Info_Jefe()
+        {
+            string info = Nombre + " " + Apellido + " " + Rut + " " + Fecha_de_Nacimiento + " " + Nacionalidad + " " + Sueldo + " " + Horario_de_Trabajo + " " + Puesto_de_Trabajo + ".";
+            return info;
+        }
     }
 }

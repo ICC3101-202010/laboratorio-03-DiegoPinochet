@@ -108,5 +108,10 @@ namespace Laboratorio3_Diego_Pincohet
                 Console.WriteLine("");
             }
         }
+        public string Info_Cajeros()
+        {
+            string info = Nombre + " " + Apellido + " " + Rut + " " + Fecha_de_Nacimiento + " " + Nacionalidad + " " + Sueldo + " " + Horario_de_Trabajo + " " + Puesto_de_Trabajo + ".";
+            return info;
+        }
     }
 }
