@@ -32,6 +32,7 @@ namespace Laboratorio3_Diego_Pincohet
 
             while (x == true)
             {
+                Console.WriteLine("PARA EMPEZAR LA SIMULACION(5) ES NECESARIO TENER POR LO MENOS 1 CAJERO Y UN STOCK.");
                 Console.WriteLine("Elige si quieres crear clientes(1), crear productos(2), crear empleados(3), utilizar metodos de cambio de sueldo, horario o puesto (4) empezar la simulación(5), hacer una simulacion aleatoria(6) o cerrar el programa(7).");
                 string eleccion = Console.ReadLine();
                 if (eleccion == "1")
@@ -166,6 +167,8 @@ namespace Laboratorio3_Diego_Pincohet
                 }
                 else if(eleccion == "4")
                 {
+                    List<Producto> productss = new List<Producto>();
+
                     Console.WriteLine("A que tipo de empleado quiere hacerle un cambio de atributos? (Cajeros, Stock o Auxiliar)");
                     string empleado = Console.ReadLine();
                     Console.WriteLine("Qué atributo quiere cambiar? (Sueldo, Horario o Puesto)");
@@ -188,7 +191,16 @@ namespace Laboratorio3_Diego_Pincohet
                         {
                             Console.WriteLine("A que cajero quiere cambiar de trabajo? (1,2,3,etc.)");
                             int num = int.Parse(Console.ReadLine());
-                            lista_cajeros[num - 1].Cambiar_Trabajo();
+                            Console.WriteLine("Escriba su nombre,apellido,rut,fecha de nacimiento, nacionalidad, sueldo, horario y su nuevo puesto");
+                            string Name = Console.ReadLine();
+                            string LastName = Console.ReadLine();
+                            string Rut = Console.ReadLine();
+                            string Año_de_Nacimiento = Console.ReadLine();
+                            string Nacionalidad = Console.ReadLine();
+                            int Sueldo = int.Parse(Console.ReadLine());
+                            string Horario = Console.ReadLine();
+                            string Puesto = Console.ReadLine();
+                            lista_cajeros[num - 1].Cambiar_Trabajo(Name, LastName, Rut, Año_de_Nacimiento, Nacionalidad, Sueldo, Horario, Puesto, 0, productss,lista_cajeros,lista_stock,lista_auxiliar);
                             lista_cajeros.RemoveAt(num - 1);
                         }
                     }
@@ -211,7 +223,15 @@ namespace Laboratorio3_Diego_Pincohet
                         {
                             Console.WriteLine("A que cajero quiere cambiar de trabajo? (1,2,3,etc.)");
                             int num = int.Parse(Console.ReadLine());
-                            lista_stock[num - 1].Cambiar_Trabajo();
+                            string Name = Console.ReadLine();
+                            string LastName = Console.ReadLine();
+                            string Rut = Console.ReadLine();
+                            string Año_de_Nacimiento = Console.ReadLine();
+                            string Nacionalidad = Console.ReadLine();
+                            int Sueldo = int.Parse(Console.ReadLine());
+                            string Horario = Console.ReadLine();
+                            string Puesto = Console.ReadLine();
+                            lista_cajeros[num - 1].Cambiar_Trabajo(Name, LastName, Rut, Año_de_Nacimiento, Nacionalidad, Sueldo, Horario, Puesto, 0, productss, lista_cajeros, lista_stock, lista_auxiliar);
                             lista_stock.RemoveAt(num - 1);
                         }
                     }
@@ -234,7 +254,15 @@ namespace Laboratorio3_Diego_Pincohet
                         {
                             Console.WriteLine("A que cajero quiere cambiar de trabajo? (1,2,3,etc.)");
                             int num = int.Parse(Console.ReadLine());
-                            lista_auxiliar[num - 1].Cambiar_Trabajo();
+                            string Name = Console.ReadLine();
+                            string LastName = Console.ReadLine();
+                            string Rut = Console.ReadLine();
+                            string Año_de_Nacimiento = Console.ReadLine();
+                            string Nacionalidad = Console.ReadLine();
+                            int Sueldo = int.Parse(Console.ReadLine());
+                            string Horario = Console.ReadLine();
+                            string Puesto = Console.ReadLine();
+                            lista_cajeros[num - 1].Cambiar_Trabajo(Name, LastName, Rut, Año_de_Nacimiento, Nacionalidad, Sueldo, Horario, Puesto, 0, productss, lista_cajeros, lista_stock, lista_auxiliar);
                             lista_auxiliar.RemoveAt(num - 1);
                         }
                     }
@@ -242,69 +270,75 @@ namespace Laboratorio3_Diego_Pincohet
                 else if (eleccion == "5")
                 {
                     bool i = true;
-                    
-                    while(i == true)
+                    if (lista_cajeros.Count() != 0 && lista_stock.Count() != 0)
                     {
-                        Console.WriteLine("Qué cliente realizará la compra? cliente1(1), cliente2(2), etc.");
-                        int client = int.Parse(Console.ReadLine());
-                        Clientes cliente = lista_clientes[client-1];
-
-                        Console.WriteLine("Aquí esta la lista de productos: ");
-
-                        for(int u = 0; u < lista_productos.Count; u++)
+                        while (i == true)
                         {
-                            Console.WriteLine(lista_productos[u].Info_Producto() + ". Su stock disponible es de: " + lista_productos[u]._Stock_disponible() + "\n");
-                            continue;
+                            Console.WriteLine("Qué cliente realizará la compra? cliente1(1), cliente2(2), etc.");
+                            int client = int.Parse(Console.ReadLine());
+                            Clientes cliente = lista_clientes[client - 1];
+
+                            Console.WriteLine("Aquí esta la lista de productos: ");
+
+                            for (int u = 0; u < lista_productos.Count; u++)
+                            {
+                                Console.WriteLine(lista_productos[u].Info_Producto() + ". Su stock disponible es de: " + lista_productos[u]._Stock_disponible() + "\n");
+                                continue;
+                            }
+                            Console.WriteLine("Qué producto desea comprar? producto1(1), producto2(2), etc.");
+                            int product = int.Parse(Console.ReadLine());
+                            Producto producto = lista_productos[product - 1];
+
+                            Console.WriteLine("Cuantos productos de este tipo desea comprar? 1, 2, etc.");
+                            int cant = int.Parse(Console.ReadLine());
+
+                            List<Producto> lista_carrito = cliente.Agregar_Producto(producto, lista_stock[0], cant);
+
+                            if (lista_carrito.Count != 0)
+                            {
+                                Console.WriteLine("Qué cajero realizará la venta? cajero1(1), cajero2(2), etc.");
+                                int caj = int.Parse(Console.ReadLine());
+                                Cajeros cajeros = lista_cajeros[caj - 1];
+
+                                int total_a_pagar = cajeros.Cuanto_Saldra(lista_carrito);
+                                List<String> Registro_de_compras = cajeros.Pagar(total_a_pagar, cliente, producto, lista_carrito, Registro_compras, cant);
+
+                                cajeros.Ver_Registro_Compras(Registro_de_compras);
+                            }
+                            else
+                            {
+                                Console.WriteLine(producto.Info_Producto() + " no esta en stock o queda menos de la cantidad que pidió. No se pudo agregar el producto.\n");
+                                Console.WriteLine("No hay productos en el carro. No se pudo realizar la compra de: " + cliente.Mi_nombre());
+                            }
+
+                            if (lista_auxiliar.Count != 0)
+                            {
+                                lista_auxiliar[0].Limpiar();
+                            }
+
+                            Console.WriteLine("Quiere que otro cliente realice una compra? Si o No");
+                            string dec = Console.ReadLine();
+                            if (dec == "Si")
+                            {
+                                Console.WriteLine("-----------------------------------------------------------------------------\n");
+                                continue;
+                            }
+                            else
+                            {
+                                Registro_compras.Clear();
+                                lista_auxiliar.Clear();
+                                lista_cajeros.Clear();
+                                lista_clientes.Clear();
+                                lista_jefes.Clear();
+                                lista_productos.Clear();
+                                lista_stock.Clear();
+                                break;
+                            }
                         }
-                        Console.WriteLine("Qué producto desea comprar? producto1(1), producto2(2), etc.");
-                        int product = int.Parse(Console.ReadLine());
-                        Producto producto = lista_productos[product - 1];
-
-                        Console.WriteLine("Cuantos productos de este tipo desea comprar? 1, 2, etc.");
-                        int cant = int.Parse(Console.ReadLine());
-
-                        List<Producto> lista_carrito = cliente.Agregar_Producto(producto, lista_stock[0], cant);   
-
-                        if (lista_carrito.Count != 0)
-                        {
-                            Console.WriteLine("Qué cajero realizará la venta? cajero1(1), cajero2(2), etc.");
-                            int caj = int.Parse(Console.ReadLine());
-                            Cajeros cajeros = lista_cajeros[caj - 1];
-
-                            int total_a_pagar = cajeros.Cuanto_Saldra(lista_carrito);
-                            List<String> Registro_de_compras = cajeros.Pagar(total_a_pagar, cliente, producto, lista_carrito, Registro_compras, cant);
-
-                            cajeros.Ver_Registro_Compras(Registro_de_compras);
-                        }
-                        else
-                        {
-                            Console.WriteLine(producto.Info_Producto() + " no esta en stock o queda menos de la cantidad que pidió. No se pudo agregar el producto.\n");
-                            Console.WriteLine("No hay productos en el carro. No se pudo realizar la compra de: " + cliente.Mi_nombre());
-                        }
-
-                        if(lista_auxiliar.Count != 0)
-                        {
-                            lista_auxiliar[0].Limpiar();
-                        }
-
-                        Console.WriteLine("Quiere que otro cliente realice una compra? Si o No");
-                        string dec = Console.ReadLine();
-                        if(dec == "Si")
-                        {
-                            Console.WriteLine("-----------------------------------------------------------------------------\n");
-                            continue;
-                        }
-                        else
-                        {
-                           Registro_compras.Clear();
-                           lista_auxiliar.Clear();
-                           lista_cajeros.Clear();
-                           lista_clientes.Clear();
-                           lista_jefes.Clear();
-                           lista_productos.Clear();
-                           lista_stock.Clear();
-                           break;
-                        }
+                    }
+                    else
+                    {
+                        Console.WriteLine("No hay Cajeros o Stocks suficientes para realizar la simulación.");
                     }
                 }
                 else if(eleccion == "6")
@@ -381,6 +415,7 @@ namespace Laboratorio3_Diego_Pincohet
                     Console.WriteLine("-----------------------------------------------------------------------------------");
                     for (int i = 0; i < 5; i++)
                     {
+                        Console.WriteLine("Compra cliente" + (i + 1) + ":\n");
                         Producto producto1 = list_productos[random.Next(30)]; // elegir un producto de la lista producto
                         int cantidad = random.Next(4); //elegir la cantidad de producto
 
@@ -404,7 +439,7 @@ namespace Laboratorio3_Diego_Pincohet
                             Console.WriteLine(producto1.Info_Producto() + " no esta en stock o queda menos de la cantidad que pidió. No se pudo agregar el producto.\n");
                             Console.WriteLine("No hay productos en el carro. No se pudo realizar la compra de: " + cliente.Mi_nombre());
                         }
-                        Console.WriteLine("--------------------------------------------------\n");
+                        Console.WriteLine("----------------------------------------------------------------------\n");
                     }
 
                     //Veremos nuevo stock
@@ -414,6 +449,8 @@ namespace Laboratorio3_Diego_Pincohet
                     {
                         Console.WriteLine(list_productos[i].Info_Producto() + ". Stock: " + list_productos[i]._Stock_disponible());
                     }
+                    Console.WriteLine("");
+
                     registro_compras.Clear();
                     list_auxiliar.Clear();
                     list_cajeros.Clear();

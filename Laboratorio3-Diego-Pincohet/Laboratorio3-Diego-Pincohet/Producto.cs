@@ -41,7 +41,7 @@ namespace Laboratorio3_Diego_Pincohet
         }
         public string Info_product()
         {
-            string info = Nombre + " " + Marca + " " + Precio+ " "+ Stock_disponible + ".";
+            string info = Nombre + " " + Marca + " " + Precio+ " Stock:"+ Stock_disponible + ".";
             return info;
             
         }

@@ -58,6 +58,7 @@ namespace Laboratorio3_Diego_Pincohet
                 Registro_compras.Add("Fecha y hora: " + time);
                 string Name = Nombre + " " + Apellido;
                 Registro_compras.Add("Atendido por: " + Name);
+                Registro_compras.Add("");
                 producto.Nuevo_stock(Cantidad);
                 cliente.New_Dinero(Carrito[0], Cantidad);
 
@@ -77,6 +78,7 @@ namespace Laboratorio3_Diego_Pincohet
                 Registro_compras.Add("Fecha y hora: " + time);
                 string Name = Nombre + " " + Apellido;
                 Registro_compras.Add("Atendido por: " + Name);
+                Registro_compras.Add("");
                 producto.Nuevo_stock(Cantidad);
                 cliente.New_Dinero(Carrito[0], Cantidad);
 
@@ -100,6 +102,7 @@ namespace Laboratorio3_Diego_Pincohet
                 for (int x = 0; x < Registro_compras.Count; x++)
                 {
                     Console.WriteLine(Registro_compras[x]);
+                    
 
                 }
             }
